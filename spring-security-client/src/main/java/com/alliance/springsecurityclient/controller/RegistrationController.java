@@ -8,10 +8,7 @@ import com.sun.net.httpserver.HttpServer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RegistrationController {
@@ -22,13 +19,27 @@ public class RegistrationController {
   @Autowired
   private ApplicationEventPublisher publisher;
 
-    @PostMapping("/register")
+  @PostMapping("/register")
   public String registerUser(@RequestBody UserModel userModel, final HttpServletRequest request) {
     User user = userService.createUser(userModel);
-    publisher.publishEvent(new RegistrationCompleteEvent(
-      user, applicationUrl(request)
-    ));
-    return "Success!!!";
+
+    if (user != null) {
+      publisher.publishEvent(new RegistrationCompleteEvent(
+        user, applicationUrl(request)
+      ));
+      return "Success!!!";
+    } else {
+      return "Failed to create the user!!";
+    }
+  }
+
+  @GetMapping("/verifyRegistration")
+  public String verifyRegistration(@RequestParam("token") String token) {
+    String result = userService.verifyRegistrationToken(token);
+    if (result.equalsIgnoreCase("valid")) {
+      return "User verified successfully!!";
+    }
+    return "Bad user!!";
   }
 
   private String applicationUrl(HttpServletRequest request) {

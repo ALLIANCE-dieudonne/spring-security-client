@@ -24,6 +24,7 @@ public class WebSecurityConfig {
   private static final String[] WHITE_LIST_URLS = {
     "/hello",
     "/register",
+    "/*"
   };
 
 

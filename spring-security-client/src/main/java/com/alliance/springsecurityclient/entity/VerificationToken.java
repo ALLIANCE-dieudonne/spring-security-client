@@ -20,7 +20,7 @@ public class VerificationToken {
   private Long id;
 
   private String token;
-  private Date expirationDate;
+  private Date expirationTime;
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id",
@@ -32,13 +32,13 @@ public class VerificationToken {
     super();
     this.token = token;
     this.user = user;
-    this.expirationDate = calculateExpirationTime();
+    this.expirationTime = calculateExpirationTime();
   }
 
   public VerificationToken(String token) {
     super();
     this.token = token;
-    this.expirationDate = calculateExpirationTime();
+    this.expirationTime = calculateExpirationTime();
   }
 
   private Date calculateExpirationTime() {
