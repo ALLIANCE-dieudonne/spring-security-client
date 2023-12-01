@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
-
 public class VerificationToken {
 
   //expiration duration

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
   User createUser(UserModel userModel);
+
+  void saveVerificationTokenForUser(String token, User user);
 }

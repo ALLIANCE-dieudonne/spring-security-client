@@ -1,10 +1,9 @@
 package com.alliance.springsecurityclient.repository;
 
-import com.alliance.springsecurityclient.entity.User;
+import com.alliance.springsecurityclient.entity.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-  User findByEmail(String email);
+public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 }
