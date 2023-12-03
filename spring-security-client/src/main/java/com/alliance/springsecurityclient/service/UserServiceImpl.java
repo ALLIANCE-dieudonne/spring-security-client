@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -58,10 +59,10 @@ public class UserServiceImpl implements UserService {
   @Override
   public String verifyRegistrationToken(String token) {
     VerificationToken verificationToken =
-            verificationTokenRepository.findByToken(token);
+      verificationTokenRepository.findByToken(token);
 
 
-    if (verificationToken== null) {
+    if (verificationToken == null) {
       return "Invalid verification token";
     }
 
@@ -75,5 +76,13 @@ public class UserServiceImpl implements UserService {
     user.setEnabled(true);
     userRepository.save(user);
     return "Valid";
+  }
+
+  @Override
+  public VerificationToken generateNewVerificationToken(String oldToken) {
+    VerificationToken verificationToken = verificationTokenRepository.findByToken(oldToken);
+    verificationToken.setToken(UUID.randomUUID().toString());
+    verificationTokenRepository.save(verificationToken);
+    return verificationToken;
   }
 }
