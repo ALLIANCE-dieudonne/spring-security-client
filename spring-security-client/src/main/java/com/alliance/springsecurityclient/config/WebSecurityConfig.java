@@ -27,7 +27,8 @@ public class WebSecurityConfig {
     "/verifyRegistration*",
     "/resendVerificationToken*",
     "/resetPassword",
-    "/savePassword"
+    "/savePassword",
+    "/changePassword"
   };
 
 
