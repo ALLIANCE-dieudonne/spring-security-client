@@ -1,0 +1,18 @@
+server:
+  port: 9000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: fils1?
+    url: jdbc:mysql://localhost:3306/user-registration
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    logging:
+      level:
+        org:
+          springframework:
+            security: DEBUG
+
